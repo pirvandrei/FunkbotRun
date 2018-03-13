@@ -38,6 +38,8 @@ public class MotorAssignment{
 	   Motor.A.stop();
 	   Motor.B.stop();
 	   Motor.A.endSynchronization(); 
+	   
+	   //test slack
 	} 
 }
 
