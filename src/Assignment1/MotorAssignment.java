@@ -1,4 +1,4 @@
-package Package;
+package Assignment1;
 import lejos.hardware.motor.Motor; 
 import lejos.robotics.RegulatedMotor;
 
