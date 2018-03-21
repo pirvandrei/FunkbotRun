@@ -1,45 +1,53 @@
-package Remote;
+package SyncMotors;
 
-import java.io.*;
-import java.net.*;
-import lejos.hardware.*;
-import lejos.hardware.motor.*;
-import lejos.hardware.port.*;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-/**
- * Maximum LEGO EV3: Building Robots with Java Brains
- * ISBN-13: 9780986832291
- * Variant Press (C) 2014
- * Chapter 14 - Client-Server Robotics
- * Robot: Remote Control Car
- * Platform: LEGO EV3
- * @author Brian Bagnall
- * @version July 20, 2014
- */
-public class RemoteCarServer extends Thread {
+import Remote.RemoteCarClient;
+import lejos.hardware.Button;
+import lejos.hardware.Key;
+import lejos.hardware.KeyListener;
+import lejos.hardware.motor.EV3LargeRegulatedMotor;
+import lejos.hardware.port.MotorPort;
+import lejos.robotics.subsumption.Behavior;
 
+public class BehaviourRemote extends Thread implements Behavior {
+
+	
+	private boolean suppressed = false;
 	public static final int port = 7360;
 	private Socket client;
 	private static boolean looping = true;
 	private static ServerSocket server;
+	private static Thread t;
 	//private static EV3MediumRegulatedMotor A = new EV3MediumRegulatedMotor(MotorPort.A);
 	private static EV3LargeRegulatedMotor A = new EV3LargeRegulatedMotor(MotorPort.A);
 	private static EV3LargeRegulatedMotor B = new EV3LargeRegulatedMotor(MotorPort.B);
 	
-	public RemoteCarServer(Socket client) {
-		this.client = client;
-		Button.ESCAPE.addKeyListener(new EscapeListener());
+	public BehaviourRemote() throws IOException {
+		server = new ServerSocket(7360);
+		System.out.println("Awaiting client.."); 
+		this.client = server.accept();
+		Button.ESCAPE.addKeyListener(new EscapeListener());  
+		t = new Thread ();
+	} 
+	 
+	public boolean takeControl() { 
+		return looping;
+	} 
+	  
+	public void suppress() {
+		while(looping) Thread.yield();
+	}
+	public void action() {
+		t.start(); 
 	}
 	
-	public static void main(String[] args) throws IOException {
-		server = new ServerSocket(port);
-		while(looping) {
-			System.out.println("Awaiting client..");
-			new RemoteCarServer(server.accept()).start();
-		}
-	}
 	
-	public void carAction(int command) {
+	public void GetAction(int command) {
 		switch(command) {
 		case RemoteCarClient.BACKWARD:
 			B.rotate(-360, true);
@@ -74,7 +82,7 @@ public class RemoteCarServer extends Thread {
 					client.close();
 					client = null;
 				} else {
-					carAction(command);
+					GetAction(command);
 				}
 			}
 			 
@@ -82,15 +90,24 @@ public class RemoteCarServer extends Thread {
 			e.printStackTrace();
 		}
 		
-	}
-
-	private class EscapeListener implements KeyListener {
+	} 
 	
-	public void keyPressed(Key k) {
-		looping = false;
-		System.exit(0);
-	}
+	private class EscapeListener implements KeyListener {
+		
+		public void keyPressed(Key k) {
+			looping = false;
+			System.exit(0);
+		}
 
-	public void keyReleased(Key k) {}
-	}
+		public void keyReleased(Key k) {}
+		}
+
+
+
+	
+	
+
+
+
+	
 }

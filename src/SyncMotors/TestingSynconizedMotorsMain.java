@@ -3,13 +3,19 @@ package SyncMotors;
 import lejos.robotics.RegulatedMotor;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 import lejos.hardware.motor.*;
 import lejos.hardware.port.MotorPort;
 
 public class TestingSynconizedMotorsMain {
 	
 	static Arbitrator arby;
-	public static void main(String[] args) {
+	private static Socket client; 
+	public static void main(String[] args) throws IOException {
 		
 		System.out.println("Program is starting...");
 		try {
@@ -18,13 +24,17 @@ public class TestingSynconizedMotorsMain {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		
 		RegulatedMotor leftMotor = new EV3LargeRegulatedMotor(MotorPort.B);
 		RegulatedMotor rightMotor = new EV3LargeRegulatedMotor(MotorPort.A);
 		Behavior b1 = new BehaviourForward(leftMotor,rightMotor);
 		InfraredAdapter ir = new InfraredAdapter();
 	    Behavior b2 = new BehaviourAvoidObject(leftMotor,rightMotor,ir);
 		Behavior b3 = new BehaviourStopByTouch();
-		Behavior[] b1b2b3 = {b1,b2,b3};
+		Behavior b4 = new BehaviourRemote();
+		Behavior[] b1b2b3 = {b1,b2, b4, b3};
 		 
 		 
 		
