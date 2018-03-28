@@ -11,8 +11,8 @@ public class NavigatorAssignment{
   public static void main(String[] args){
     
 	  
-	  Wheel wheelL = WheeledChassis.modelWheel(Motor.A, 37).offset(-72.5);
-	  Wheel wheelR = WheeledChassis.modelWheel(Motor.B, 37).offset(72.5);
+	  Wheel wheelL = WheeledChassis.modelWheel(Motor.A, 37).offset(-45.5);
+	  Wheel wheelR = WheeledChassis.modelWheel(Motor.B, 37).offset(45.5);
 	  
 	  Chassis chassis = new WheeledChassis(new Wheel[] { wheelL, wheelR }, WheeledChassis.TYPE_DIFFERENTIAL);
  
