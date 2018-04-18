@@ -1,11 +1,6 @@
 package Project;
 import lejos.robotics.RegulatedMotor;
-import lejos.robotics.subsumption.Behavior;
-
-// Taken from Bagnall p. 273.
-// - very badly designed code as it anticipates priority :/
-//   and depends on assumptions about other behaviours' internal matters:
-//    -- it works only because any other b. calls commands for both motors
+import lejos.robotics.subsumption.Behavior; 
 
 public class BehaviourForward implements Behavior {
 	RegulatedMotor leftMotor;
@@ -24,8 +19,7 @@ public class BehaviourForward implements Behavior {
 		rightMotor.forward();
 	}
 
-	public void suppress() {
-		// nothing to do
+	public void suppress() { 
 	}
 
 }

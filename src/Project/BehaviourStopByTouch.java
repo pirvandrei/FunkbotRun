@@ -20,10 +20,9 @@ public class BehaviourStopByTouch implements Behavior {
 
 	@Override
 	public void action() { System.exit(1); }
-
+	
 	@Override
-	public void suppress() {
-		//Thread.yield(); //?????		
+	public void suppress() { 	
 	}
 
 
