@@ -1,4 +1,4 @@
-package BehavioursRevisedjavaFiles;
+package Maze;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;

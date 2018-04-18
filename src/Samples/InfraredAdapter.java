@@ -1,4 +1,4 @@
-package BehavioursRevisedjavaFiles;
+package Samples;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;

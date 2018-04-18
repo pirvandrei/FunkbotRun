@@ -33,8 +33,8 @@ public class TestingSynconizedMotorsMain {
 		InfraredAdapter ir = new InfraredAdapter();
 	    Behavior b2 = new BehaviourAvoidObject(leftMotor,rightMotor,ir);
 		Behavior b3 = new BehaviourStopByTouch();
-		Behavior b4 = new BehaviourRemote();
-		Behavior[] b1b2b3 = {b1,b2, b4, b3};
+		//Behavior b4 = new BehaviourRemote();
+		Behavior[] b1b2b3 = {b1,b2, b3};
 		 
 		 
 		

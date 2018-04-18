@@ -1,11 +1,11 @@
-package BehavioursRevisedjavaFiles;
+package Project;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;
 
 // adapted from Bagnall p. 275-276; this is an example of a high-level sensor, cf. course note
 public class InfraredAdapter extends Thread {
-    public int objectDistance = 1000;
+    int objectDistance = 1000;
 	EV3IRSensor irSensor = new EV3IRSensor(SensorPort.S2);
 	SampleProvider sp = irSensor.getDistanceMode();
 	
