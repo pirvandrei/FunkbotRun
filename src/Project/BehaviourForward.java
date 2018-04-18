@@ -1,5 +1,5 @@
 package Project;
-import lejos.robotics.navigation.MovePilot;
+import lejos.robotics.RegulatedMotor;
 import lejos.robotics.subsumption.Behavior;
 
 // Taken from Bagnall p. 273.
@@ -8,17 +8,11 @@ import lejos.robotics.subsumption.Behavior;
 //    -- it works only because any other b. calls commands for both motors
 
 public class BehaviourForward implements Behavior {
-//	RegulatedMotor leftMotor;
-//	RegulatedMotor rightMotor;
-	MovePilot pilot;
+	RegulatedMotor leftMotor;
+	RegulatedMotor rightMotor;
 	
-	
-//	public BehaviourForward(RegulatedMotor left, RegulatedMotor right) {
-//		this.leftMotor = left; this.rightMotor = right;
-//	}
-	public BehaviourForward(MovePilot MPilot) {
-		this.pilot = MPilot; 
-		
+	public BehaviourForward(RegulatedMotor left, RegulatedMotor right) {
+		this.leftMotor = left; this.rightMotor = right;
 	}
 	
 	public boolean takeControl() {
@@ -26,10 +20,8 @@ public class BehaviourForward implements Behavior {
 	}
 
 	public void action() {
-		 
-		pilot.setLinearSpeed(100);
-		pilot.setAngularSpeed(45);
-		pilot.forward();
+		leftMotor.forward();
+		rightMotor.forward();
 	}
 
 	public void suppress() {

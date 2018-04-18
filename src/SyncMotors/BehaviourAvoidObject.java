@@ -1,6 +1,7 @@
 package SyncMotors;
 
 import lejos.robotics.RegulatedMotor;
+import lejos.robotics.navigation.MovePilot;
 import lejos.robotics.subsumption.Behavior;
 
 // adapted from Bagnall p. 274
@@ -30,13 +31,15 @@ public class BehaviourAvoidObject implements Behavior {
 		   leftMotor.rotate(450);
 		   rightMotor.rotate(-450);
 		rightMotor.endSynchronization();
-		backing_up=false;
+ 		backing_up=false;
 	}
 
 	public void suppress() {
 		// The following from the book looks weird; not in accordance with the specification
 		while(backing_up) Thread.yield();
 	}
+	
+	 
 	
 
 }
