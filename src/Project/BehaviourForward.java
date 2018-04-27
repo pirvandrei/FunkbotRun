@@ -8,6 +8,8 @@ public class BehaviourForward implements Behavior {
 	
 	public BehaviourForward(RegulatedMotor left, RegulatedMotor right) {
 		this.leftMotor = left; this.rightMotor = right;
+		leftMotor.setSpeed(400); 
+		rightMotor.setSpeed(400); 
 	}
 	
 	public boolean takeControl() {
