@@ -1,27 +1,26 @@
 package Project;
-import lejos.robotics.RegulatedMotor;
-import lejos.robotics.subsumption.Behavior; 
+
+import lejos.robotics.subsumption.Behavior;
 
 public class BehaviourForward implements Behavior {
-	RegulatedMotor leftMotor;
-	RegulatedMotor rightMotor;
-	
-	public BehaviourForward(RegulatedMotor left, RegulatedMotor right) {
-		this.leftMotor = left; this.rightMotor = right;
-		leftMotor.setSpeed(400); 
-		rightMotor.setSpeed(400); 
+	SteeringController sc;
+
+	public BehaviourForward(SteeringController sc) {
+		this.sc = sc;
 	}
-	
+
+	@Override
 	public boolean takeControl() {
 		return true;
 	}
 
+	@Override
 	public void action() {
-		leftMotor.forward();
-		rightMotor.forward();
+		sc.moveForward();
 	}
 
-	public void suppress() { 
+	@Override
+	public void suppress() {
 	}
 
 }
